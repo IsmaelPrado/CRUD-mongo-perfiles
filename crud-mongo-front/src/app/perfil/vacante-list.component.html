@@ -1,0 +1,52 @@
+<div class="container">
+  <!-- Encabezado -->
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Administración de la Vacante</h2>
+      <hr>
+      <p class="text-muted">
+        En este módulo, puedes crear el formulario que contendrá las preguntas específicas y las posibles respuestas que consideres relevantes para evaluar a los candidatos. Además, podrás asignar una ponderación a cada respuesta para establecer su importancia en el proceso de selección. Esta herramienta te permitirá diseñar un algoritmo de match que evaluará las respuestas de los candidatos en función de los requisitos y criterios que establezcas, facilitando así la identificación de los perfiles más adecuados para la vacante.
+      </p>
+    </div>
+  </div>
+
+  <!-- Botón para regresar -->
+  <div class="position-fixed fixed-bottom fixed-end mb-3 ms-5">
+    <a class="btn btn-primary btn-lg" routerLink="/list">
+      <i class="fa-solid fa-arrow-left"></i>  Regresar
+    </a>
+  </div>
+
+  <!-- Formulario de administración de la vacante -->
+  <form class="bg-light p-4 rounded" (ngSubmit)="guardarVacante()" #vacanteForm="ngForm" >
+
+    <!-- Sección para agregar preguntas -->
+    <div *ngFor="let pregunta of preguntas; let i = index; trackBy: trackByFn" class="border mb-4 p-4 rounded">
+      <h4 class="mb-3">Pregunta {{ i + 1 }}</h4>
+      <div class="mb-3">
+        <label for="textoPregunta{{ i }}" class="form-label">Texto de la Pregunta</label>
+        <input type="text" class="form-control" id="textoPregunta{{ i }}" name="textoPregunta{{ i }}" [(ngModel)]="preguntas[i]" required>
+      </div>
+
+      <div *ngFor="let respuesta of respuestas[i]; let j = index; trackBy: trackByFn" class="mb-3 border p-3 rounded">
+        <label for="textoRespuesta{{ i }}{{ j }}" class="form-label">Texto de la Respuesta</label>
+        <input type="text" class="form-control" id="textoRespuesta{{ i }}{{ j }}" name="textoRespuesta{{ i }}{{ j }}" [(ngModel)]="respuestas[i][j]" required>
+        <label for="puntuacion{{ i }}{{ j }}" class="form-label">Puntuación de la Respuesta</label>
+        <input type="number" class="form-control" id="puntuacion{{ i }}{{ j }}" name="puntuacion{{ i }}{{ j }}" [(ngModel)]="puntuaciones[i][j]" required>
+        <button type="button" class="btn btn-danger mt-2" (click)="eliminarRespuesta(i, j)">Eliminar Respuesta</button>
+      </div>
+
+      <!-- Botón para agregar respuesta -->
+      <button type="button" class="btn btn-primary me-2" (click)="agregarRespuesta(i)">Agregar Respuesta</button>
+      <!-- Botón para eliminar pregunta -->
+      <button type="button" class="btn btn-danger me-2" (click)="eliminarPregunta(i)">Eliminar Pregunta</button>
+      <hr>
+    </div>
+
+    <!-- Botón para agregar pregunta -->
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-primary mb-2 me-2" (click)="agregarPregunta()">Agregar Pregunta</button>
+      <button type="submit" class="btn btn-success mb-2">Guardar Formulario</button>
+    </div>
+  </form>
+</div>

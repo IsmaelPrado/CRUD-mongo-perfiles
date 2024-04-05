@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 mx-auto">
+                <h4 class="display-4 fw-bold text-dark mb-4">Create Vacante</h4>
+                <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+                    <div class="mb-3 row align-items-center">
+                        <label for="name" class="col-sm-3 col-form-label"><i class="fas fa-user-circle me-2"></i> Profile name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter profile name" autocomplete="off" required [(ngModel)]="name">
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-success w-100 mb-3" [disabled]="!f.valid"><i class="fas fa-plus-circle"></i> Create</button>
+                    <button class="btn btn-outline-primary w-100" routerLink="../"><i class="fas fa-arrow-alt-circle-left"></i> Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

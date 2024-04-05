@@ -1,0 +1,70 @@
+<app-menu [perfils]="perfils" (filterEvent)="applyFilter($event)" (resetEvent)="resetPerfils()"></app-menu>
+<div class="container">
+
+  <div class="position-fixed bottom-0 start-0 mb-3 ms-3">
+    <button class="btn btn-success btn-lg" routerLink="/create">
+      <i class="fas fa-plus-circle"></i> Add New Vacante
+    </button>
+  </div>
+
+  <!-- Mostrar el mensaje "Profile not found" si la lista de perfiles está vacía -->
+  <div *ngIf="showMessage" class="text-center mt-5">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+      <h5 *ngIf="showMessage" class="not-found-message">Vacante "{{ searchText }}" not found</h5>
+      <h5 *ngIf="!showMessage" class="not-found-message">Vacante not found</h5>
+    </div>
+  </div>
+
+  <!-- Mostrar el ícono de carga y el mensaje de "Cargando perfiles" -->
+  <div class="text-center mt-5" *ngIf="perfilService.loading">
+    <p class="text-dark font-weight-bold display-5 mb-4">Cargando vacantes...</p>
+    <div class="d-flex justify-content-center align-items-center">
+      <i class="fa-solid fa-circle-notch fa-spin fa-4x text-primary"></i>
+    </div>
+  </div>
+
+
+  <!-- Mostrar la lista de perfiles solo si hay perfiles para mostrar -->
+  <div class="row" *ngIf="perfils.length > 0">
+    <div class="col-md-4" *ngFor="let perf of perfils | searchFilter: searchText">
+      <div class="card mb-3">
+        <img [src]="perf.imageURL" class="card-img-top img-fluid rounded" alt="Profile Image">
+        <div class="card-body">
+          <h5 class="card-title mb-3 text-center display-6">
+            <span *ngIf="searchText && perf.name.toLowerCase().includes(searchText.toLowerCase())">
+              {{ perf.name.substr(0, perf.name.toLowerCase().indexOf(searchText.toLowerCase())) }}
+              <span class="text-primary font-weight-bold d-inline mr-0">
+                {{ perf.name.substr(perf.name.toLowerCase().indexOf(searchText.toLowerCase()), searchText.length) }}
+              </span>
+              {{ perf.name.substr(perf.name.toLowerCase().indexOf(searchText.toLowerCase()) + searchText.length) }}
+            </span>
+            <span *ngIf="!searchText || !perf.name.toLowerCase().includes(searchText.toLowerCase())">
+              {{ perf.name }}
+            </span>
+          </h5>
+          <hr class="my-2">
+          <p class="card-text text-start">Description:{{ perf.desc }}</p>
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <button class="btn btn-outline-primary" routerLink="/detail/{{perf.id}}"><i class="far fa-eye"></i>
+              View</button>
+
+            <button class="btn btn-outline-warning" routerLink="/update/{{ perf.id }}"><i class="far fa-edit"></i>
+              Edit</button>
+            <button class="btn btn-outline-danger" (click)="onDelete(perf.id)"><i class="far fa-trash-alt"></i>
+              Delete</button>
+            <!-- Agrega el botón para ver las vacantes -->
+            <!-- Agrega el botón para postularse en lugar de vacantes -->
+            <button class="btn btn-outline-info" routerLink="/{{ perf.id }}/vacante">
+              <i class="fas fa-clipboard-list"></i> Postularse
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---->
+
+
+</div>

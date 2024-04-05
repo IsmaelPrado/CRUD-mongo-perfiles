@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../model/product';
+import { Perfil } from '../model/perfil';
 
 const KEY_PROD = 'prod_update';
 
@@ -10,11 +10,11 @@ export class StorageService {
 
   constructor() { }
 
-  public setProduct(product: Product): void{
-    localStorage.setItem(KEY_PROD, JSON.stringify(product));
+  public setProduct(perfil: Perfil): void{
+    localStorage.setItem(KEY_PROD, JSON.stringify(perfil));
   }
 
-  public getProduct(): Product{
+  public getProduct(): Perfil{
     return JSON.parse(localStorage.getItem(KEY_PROD)!);
   }
 

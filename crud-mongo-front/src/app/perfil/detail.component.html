@@ -1,0 +1,54 @@
+<app-menu></app-menu>
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container" *ngIf="perfil">
+        <div class="row mt-5">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-header text-center bg-light display-4 fw-bold text-dark mb-4">
+                        Detail Profile
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <img [src]="perfil.imageURL" class="img-fluid rounded-circle mb-3" alt="Profile Image" style="max-width: 200px;">
+                                <h5 class="card-title">{{perfil.name}}</h5>
+                                <p class="card-text">{{perfil.desc}}</p>
+                            </div>
+                            <div class="col-md-8">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>ID: </b>{{perfil.id}}</li>
+                                    <li class="list-group-item"><b>Experiencia Laboral: </b>{{perfil.experienciaLaboral}}</li>
+                                    <li class="list-group-item"><b>Educacion: </b>{{perfil.educacion}}</li>
+                                    <li class="list-group-item"><b>Habilidades:</b></li>
+                                    <ul>
+                                        <li *ngFor="let habilidad of perfil.habilidades" class="badge rounded-pill bg-secondary me-2 mb-2">{{habilidad}}</li>
+                                    </ul>
+                                    <li class="list-group-item"><b>Idiomas:</b></li>
+                                    <ul>
+                                        <li *ngFor="let idioma of perfil.idiomas" class="badge rounded-pill bg-danger me-2 mb-2">{{idioma}}</li>
+                                    </ul>
+                                    <li class="list-group-item"><b>Ubicacion: </b>{{perfil.ubicacion}}</li>
+                                    <li class="list-group-item"><b>Disponibilidad: </b>{{perfil.disponibilidad}}</li>
+                                    <li class="list-group-item"><b>Intereses:</b></li>
+                                    <ul>
+                                        <li *ngFor="let interes of perfil.intereses" class="badge rounded-pill bg-primary me-2 mb-2">{{interes}}</li>
+                                    </ul>
+                                    <li class="list-group-item"><b>Referencias:</b></li>
+                                    <ul>
+                                        <li *ngFor="let referencia of perfil.referencias" class="badge rounded-pill bg-success me-2 mb-2">{{referencia}}</li>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-primary w-100" routerLink="/list">
+                            <i class="fas fa-arrow-alt-circle-left"></i> Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

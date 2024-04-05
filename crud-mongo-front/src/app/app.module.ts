@@ -9,15 +9,23 @@ import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 //Components
-import { ListComponent } from './product/list.component';
-import { DetailComponent } from './product/detail.component';
-import { CreateComponent } from './product/create.component';
-import { UpdateComponent } from './product/update.component';
+import { ListComponent } from './perfil/list.component';
+import { DetailComponent } from './perfil/detail.component';
+import { CreateComponent } from './perfil/create.component';
+import { UpdateComponent } from './perfil/update.component';
 import { MenuComponent } from './menu/menu.component';
+
 
 //External
 //import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ToastrModule } from 'ngx-toastr';
+import { PerfilService } from './services/perfil.service';
+import { VacanteCreateComponent } from './perfil/vacante-create.component';
+import { VacanteDetailComponent } from './perfil/vacante-detail.component';
+import { VacanteListComponent } from './perfil/vacante-list.component';
+import { VacanteUpdateComponent } from './perfil/vacante-update.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -27,7 +35,13 @@ import { ToastrModule } from 'ngx-toastr';
     DetailComponent,
     CreateComponent,
     UpdateComponent,
-    MenuComponent
+    MenuComponent,
+    VacanteCreateComponent,
+    VacanteDetailComponent,
+    VacanteListComponent,
+    VacanteUpdateComponent,
+    SearchFilterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +52,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [PerfilService, SearchFilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

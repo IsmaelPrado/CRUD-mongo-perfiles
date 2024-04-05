@@ -1,0 +1,146 @@
+<app-menu></app-menu>
+
+<div class="d-flex justify-content-center align-items-start min-vh-100">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <h4 class="display-4 fw-bold text-dark mb-4">Update Profile</h4>
+        <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+          <div class="mb-3 row align-items-center">
+            <label for="name" class="col-sm-3 col-form-label"><i class="fas fa-user-circle me-2"></i> Profile
+              name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter profile name"
+                autocomplete="off" required [(ngModel)]="perfil.name">
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <label for="desc" class="col-sm-3 col-form-label"><i class="fa-solid fa-pencil"></i> Profile
+              description</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="desc" name="desc" placeholder="Enter profile description"
+                autocomplete="off" required [(ngModel)]="perfil.desc">
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <label for="imageURL" class="col-sm-3 col-form-label"><i class="fa-regular fa-image"></i> Profile image
+              URL</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="imageURL" name="imageURL"
+                placeholder="Enter profile image URL" autocomplete="off" required [(ngModel)]="perfil.imageURL">
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center" *ngFor="let habilidad of perfil.habilidades; let i = index; trackBy: trackByFn">
+            <label class="col-sm-3 col-form-label">Skill {{ i + 1 }}</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [id]="'habilidades' + i" name="habilidades{{ i }}"
+                placeholder="Enter skill" autocomplete="off" required [(ngModel)]="perfil.habilidades[i]">
+
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-outline-danger" (click)="eliminarHabilidad(i)">-</button>
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <button type="button" class="btn btn-outline-primary" (click)="agregarHabilidad()">+ Add Skill</button>
+            </div>
+          </div>
+          <!-- Experiencia Laboral -->
+          <div class="mb-3 row align-items-center">
+            <label for="experienciaLaboral" class="col-sm-3 col-form-label"><i class="fas fa-briefcase me-2"></i>
+              Experience</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="experienciaLaboral" name="experienciaLaboral"
+                placeholder="Enter experience" autocomplete="off" required [(ngModel)]="perfil.experienciaLaboral">
+            </div>
+          </div>
+          <!-- Educación -->
+          <div class="mb-3 row align-items-center">
+            <label for="educacion" class="col-sm-3 col-form-label"><i class="fas fa-graduation-cap me-2"></i>
+              Education</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="educacion" name="educacion" placeholder="Enter education"
+                autocomplete="off" required [(ngModel)]="perfil.educacion">
+            </div>
+          </div>
+          <!-- Idiomas -->
+          <div class="mb-3 row align-items-center" *ngFor="let idioma of perfil.idiomas; let i = index; trackBy: trackByFn">
+            <label class="col-sm-3 col-form-label">Language {{ i + 1 }}</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="idiomas{{ i }}" name="idiomas{{ i }}"
+                placeholder="Enter language" autocomplete="off" required [(ngModel)]="perfil.idiomas[i]">
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-outline-danger" (click)="eliminarIdioma(i)">-</button>
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <button type="button" class="btn btn-outline-primary" (click)="agregarIdioma()">+ Add Language</button>
+            </div>
+          </div>
+          <!-- Ubicación -->
+          <div class="mb-3 row align-items-center">
+            <label for="ubicacion" class="col-sm-3 col-form-label"><i class="fas fa-map-marker-alt me-2"></i>
+              Location</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="ubicacion" name="ubicacion" placeholder="Enter location"
+                autocomplete="off" required [(ngModel)]="perfil.ubicacion">
+            </div>
+          </div>
+          <!-- Disponibilidad -->
+          <div class="mb-3 row align-items-center">
+            <label for="disponibilidad" class="col-sm-3 col-form-label"><i class="fas fa-clock me-2"></i>
+              Availability</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="disponibilidad" name="disponibilidad"
+                placeholder="Enter availability" autocomplete="off" required [(ngModel)]="perfil.disponibilidad">
+            </div>
+          </div>
+          <!-- Intereses -->
+          <div class="mb-3 row align-items-center" *ngFor="let interes of perfil.intereses; let i = index; trackBy: trackByFn">
+            <label class="col-sm-3 col-form-label">Interest {{ i + 1 }}</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="intereses{{ i }}" name="intereses{{ i }}"
+                placeholder="Enter interest" autocomplete="off" required [(ngModel)]="perfil.intereses[i]">
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-outline-danger" (click)="eliminarInteres(i)">-</button>
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <button type="button" class="btn btn-outline-primary" (click)="agregarInteres()">+ Add Interest</button>
+            </div>
+          </div>
+          <!-- Referencias -->
+          <div class="mb-3 row align-items-center" *ngFor="let referencia of perfil.referencias; let i = index; trackBy: trackByFn">
+            <label class="col-sm-3 col-form-label">Reference {{ i + 1 }}</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="referencias{{ i }}" name="referencias{{ i }}"
+                placeholder="Enter reference" autocomplete="off" required [(ngModel)]="perfil.referencias[i]">
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-outline-danger" (click)="eliminarReferencia(i)">-</button>
+            </div>
+          </div>
+          <div class="mb-3 row align-items-center">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <button type="button" class="btn btn-outline-primary" (click)="agregarReferencia()">+ Add
+                Reference</button>
+            </div>
+          </div>
+          <button class="btn btn-outline-success w-100 mb-3" [disabled]="!f.valid"><i class="far fa-edit"></i>
+            Update</button>
+          <button class="btn btn-outline-primary w-100" routerLink="/list"><i class="fas fa-arrow-alt-circle-left"></i>
+            Back</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
